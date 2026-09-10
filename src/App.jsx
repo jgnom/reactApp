@@ -5,12 +5,14 @@ function App() {
   const [inputValue, setInputValue] = useState("");
 
   const handleAddTask = () => {
+    if (inputValue.trim() !== "") {
     setTasks([...tasks, {id: Date.now(), text: inputValue}]);
     setInputValue("")
-  }
+    }
+  };
   const handleDeleteTask = (id) => {
     setTasks(tasks.filter(task => task.id !== id))
-  }
+  };
 
   return <div className='App'>
     <h1>Мой список дел</h1>
