@@ -37,3 +37,16 @@ button {
 button:hover {
   background-color: #45a049;
 }
+
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task-list li {
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 4px;
+  border-left: 4px solid #4caf50;
+}
