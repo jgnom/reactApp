@@ -1,4 +1,5 @@
 import './App.css'
+import TaskInput from './TaskInput';
 import { useState } from 'react'
 function App() {
   const [tasks, setTasks] = useState([]); 
@@ -16,14 +17,11 @@ function App() {
 
   return <div className='App'>
     <h1>Мой список дел</h1>
-    <div className='inputContainer'>
-      <input type="text"
-      value={inputValue}
-      onChange={(e) => setInputValue(e.target.value)}
-      placeholder='Введите задачу...'
+    <TaskInput
+      inputValue={inputValue}
+      setInputValue={setInputValue}
+      onAddTask={handleAddTask}
       />
-      <button onClick={handleAddTask}>Добавить</button>
-    </div>
     <ul className='task-list'>
       {tasks.map((task) => (
         <li key={task.id}>
