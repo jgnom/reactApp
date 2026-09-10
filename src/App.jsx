@@ -20,6 +20,11 @@ function App() {
       />
       <button onClick={handleAddTask}>Добавить</button>
     </div>
+    <ul className='task-list'>
+      {tasks.map((task) => (
+        <li key={task.id}> {task.text}</li>
+      ))}
+    </ul>
     <p>Задач: {tasks.length}</p>
   </div>
 
