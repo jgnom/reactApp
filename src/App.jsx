@@ -8,7 +8,9 @@ function App() {
     setTasks([...tasks, {id: Date.now(), text: inputValue}]);
     setInputValue("")
   }
-
+  const handleDeleteTask = (id) => {
+    setTasks(tasks.filter(task => task.id !== id))
+  }
 
   return <div className='App'>
     <h1>Мой список дел</h1>
@@ -22,7 +24,10 @@ function App() {
     </div>
     <ul className='task-list'>
       {tasks.map((task) => (
-        <li key={task.id}> {task.text}</li>
+        <li key={task.id}>
+          <p>{task.text}</p>
+          <button className='delete-btn' onClick={() => handleDeleteTask(task.id)}>Удалить</button>
+          </li>
       ))}
     </ul>
     <p>Задач: {tasks.length}</p>
