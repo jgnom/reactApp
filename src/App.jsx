@@ -1,5 +1,6 @@
 import './App.css'
 import TaskInput from './TaskInput';
+import TaskList from './TaskList';
 import { useState } from 'react'
 function App() {
   const [tasks, setTasks] = useState([]); 
@@ -22,14 +23,7 @@ function App() {
       setInputValue={setInputValue}
       onAddTask={handleAddTask}
       />
-    <ul className='task-list'>
-      {tasks.map((task) => (
-        <li key={task.id}>
-          <p>{task.text}</p>
-          <button className='delete-btn' onClick={() => handleDeleteTask(task.id)}>Удалить</button>
-          </li>
-      ))}
-    </ul>
+    <TaskList tasks={tasks} onDeleteTask={handleDeleteTask}/>
     <p>Задач: {tasks.length}</p>
   </div>
 
