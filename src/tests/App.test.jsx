@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import App from "../App";
+import App from "../App"; // ← Обратите внимание: "../" поднимает нас из папки tests в папку src
 
 describe("App component", () => {
   test("Добавление новой задачи и её отображение в списке", () => {
@@ -21,18 +21,18 @@ describe("App component", () => {
     const input = screen.getByPlaceholderText("Введите задачу...");
     const addButton = screen.getByText("Добавить");
 
-    // Добавляем задачу
+    // 1. Добавляем задачу
     fireEvent.change(input, { target: { value: "Задача для удаления" } });
     fireEvent.click(addButton);
 
-    // Проверяем, что задача добавилась
+    // 2. Проверяем, что задача добавилась
     expect(screen.getByText("Задача для удаления")).toBeInTheDocument();
 
-    // Удаляем задачу
+    // 3. Находим кнопку "Удалить" и кликаем по ней
     const deleteButton = screen.getByText("Удалить");
     fireEvent.click(deleteButton);
 
-    // Проверяем, что задача удалена
+    // 4. Проверяем, что задача удалена и счетчик стал 0
     expect(screen.queryByText("Задача для удаления")).not.toBeInTheDocument();
     expect(screen.getByText("Задач: 0")).toBeInTheDocument();
   });

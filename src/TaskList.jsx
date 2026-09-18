@@ -1,12 +1,11 @@
-import TaskItem from "./TaskItem";
+import TaskItem from './TaskItem.jsx';
 
-
-export default function TaskList({tasks, onDeleteTask}) {
-    return (
-        <ul className='task-list'>
+export default function TaskList({ tasks, onDeleteTask }) {
+  return (
+    <ul className="task-list">
       {tasks.map((task) => (
-        <TaskItem key={task.id} task={task} onDelete={onDeleteTask}/>
+        <TaskItem key={task.id} task={task} onDeleteTask={onDeleteTask} />
       ))}
     </ul>
-    )
+  );
 }

@@ -17,19 +17,22 @@ describe("TaskItem component", () => {
 
   test("Вызов onDeleteTask при клике на кнопку удаления", () => {
     const task = { id: 1, text: "Купить молоко" };
-    const onDeleteTask = jest.fn();
+    
+    // Создаем мок-функцию и называем её понятно
+    const mockOnDeleteTask = jest.fn(); 
     
     render(
       <TaskItem 
         task={task} 
-        onDeleteTask={onDeleteTask} 
+        onDeleteTask={mockOnDeleteTask} // Передаем именно в проп onDeleteTask
       />
     );
 
     const deleteButton = screen.getByText("Удалить");
     fireEvent.click(deleteButton);
 
-    expect(onDeleteTask).toHaveBeenCalledWith(1);
-    expect(onDeleteTask).toHaveBeenCalledTimes(1);
+    // Проверяем, что наша мок-функция была вызвана с правильным ID
+    expect(mockOnDeleteTask).toHaveBeenCalledWith(1);
+    expect(mockOnDeleteTask).toHaveBeenCalledTimes(1);
   });
 });
