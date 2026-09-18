@@ -11,7 +11,10 @@ describe("TaskInput component", () => {
       />
     );
 
+    // toBeInTheDocument – проверяет, что элемент input с указанным плейсхолдером успешно отрендерился и присутствует в DOM
     expect(screen.getByPlaceholderText("Введите задачу...")).toBeInTheDocument();
+
+    // toBeInTheDocument – проверяет, что кнопка с текстом "Добавить" также присутствует в DOM
     expect(screen.getByText("Добавить")).toBeInTheDocument();
   });
 
@@ -29,6 +32,7 @@ describe("TaskInput component", () => {
     const input = screen.getByPlaceholderText("Введите задачу...");
     fireEvent.change(input, { target: { value: "Новая задача" } });
 
+    // toHaveBeenCalledWith – проверяет, что мок-функция была вызвана хотя бы один раз с конкретным аргументом ("Новая задача")
     expect(setInputValue).toHaveBeenCalledWith("Новая задача");
   });
 
@@ -46,6 +50,7 @@ describe("TaskInput component", () => {
     const button = screen.getByText("Добавить");
     fireEvent.click(button);
 
+    // toHaveBeenCalledTimes – проверяет, что мок-функция была вызвана строго указанное количество раз (в данном случае, ровно 1 раз)
     expect(onAddTask).toHaveBeenCalledTimes(1);
   });
 });
