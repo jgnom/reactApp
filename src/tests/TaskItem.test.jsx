@@ -12,6 +12,7 @@ describe("TaskItem component", () => {
       />
     );
 
+     // toBeInTheDocument – проверяет, что элемент с текстом задачи успешно отрендерился и присутствует в DOM-дереве
     expect(screen.getByText("Купить молоко")).toBeInTheDocument();
   });
 
@@ -30,7 +31,10 @@ describe("TaskItem component", () => {
     const deleteButton = screen.getByText("Удалить");
     fireEvent.click(deleteButton);
 
+    // toHaveBeenCalledWith – проверяет, что функция-обработчик была вызвана с правильным аргументом (id удаляемой задачи, равным 1)
     expect(mockOnDeleteTask).toHaveBeenCalledWith(1);
+
+    // toHaveBeenCalledTimes – проверяет, что функция удаления была вызвана строго один раз, что предотвращает случайные множественные срабатывания
     expect(mockOnDeleteTask).toHaveBeenCalledTimes(1);
   });
 });
