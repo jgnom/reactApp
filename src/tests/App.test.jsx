@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import App from "../App"; // ← Обратите внимание: "../" поднимает нас из папки tests в папку src
+import App from "../App";
 
 describe("App component", () => {
   test("Добавление новой задачи и её отображение в списке", () => {
@@ -11,7 +11,10 @@ describe("App component", () => {
     fireEvent.change(input, { target: { value: "Новая задача" } });
     fireEvent.click(addButton);
 
+    // toBeInTheDocument – проверяет, что элемент с текстом "Новая задача" успешно отрендерился и присутствует в DOM
     expect(screen.getByText("Новая задача")).toBeInTheDocument();
+
+    // toBeInTheDocument – проверяет, что счетчик задач обновился и отображает корректное число "1"
     expect(screen.getByText("Задач: 1")).toBeInTheDocument();
   });
 
@@ -21,19 +24,20 @@ describe("App component", () => {
     const input = screen.getByPlaceholderText("Введите задачу...");
     const addButton = screen.getByText("Добавить");
 
-    // 1. Добавляем задачу
     fireEvent.change(input, { target: { value: "Задача для удаления" } });
     fireEvent.click(addButton);
 
-    // 2. Проверяем, что задача добавилась
+    // toBeInTheDocument – проверяет, что задача действительно добавилась в список перед попыткой её удаления
     expect(screen.getByText("Задача для удаления")).toBeInTheDocument();
 
-    // 3. Находим кнопку "Удалить" и кликаем по ней
     const deleteButton = screen.getByText("Удалить");
     fireEvent.click(deleteButton);
 
-    // 4. Проверяем, что задача удалена и счетчик стал 0
+    // not.toBeInTheDocument (в связке с queryByText) – проверяет, что элемент был успешно удален из DOM. 
+    // Используется queryByText, так как getByText выбросил бы ошибку, если элемент не найден.
     expect(screen.queryByText("Задача для удаления")).not.toBeInTheDocument();
+
+    // toBeInTheDocument – проверяет, что счетчик задач обновился и показывает "0" после удаления
     expect(screen.getByText("Задач: 0")).toBeInTheDocument();
   });
 });
