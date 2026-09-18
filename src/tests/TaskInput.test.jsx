@@ -7,7 +7,7 @@ describe("TaskInput component", () => {
       <TaskInput inputValue="" setInputValue={() => {}} onAddTask={() => {}} />
     );
 
-    expect(screen.getByPlaceholderText("Введите задачу")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Введите задачу...")).toBeInTheDocument();
     expect(screen.getByText("Добавить")).toBeInTheDocument();
   });
 });
